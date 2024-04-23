@@ -5,3 +5,11 @@ type GoEditFile struct {
 	Buffer string
 	IsModified bool
 }
+
+func (gef *GoEditFile) ToString() string {
+	if gef == nil {
+		return "No File"
+	}
+
+	return gef.Path
+}

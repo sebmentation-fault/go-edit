@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
-  go_edit "sebmentation-fault/go-edit/pkg"
+go_edit "sebmentation-fault/go-edit/pkg"
 )
 
 func main() {
@@ -49,10 +49,17 @@ func main() {
 				os.Exit(-4)
 			}
 
-      // create a GoEditFile struct
+			// create a GoEditFile struct
+			gef := go_edit.GoEditFile{
+				Path: fPath,
+				Buffer: "",
+				IsModified: false,
+			}
 
-			fmt.Println("Opening file...")
-			os.Exit(0)
+			term := go_edit.InitUI()
+
+			term.DrawWindow(&gef, go_edit.EDITING_MODE)
+
 			break
 
 		case 'n':
@@ -62,9 +69,20 @@ func main() {
 			break
 		}
 
+		break
+
 	case go_edit.SUCCESS:
 		fmt.Println("Opening file...")
-		os.Exit(0)
+		gef := go_edit.GoEditFile{
+			Path: fPath,
+			Buffer: "",
+			IsModified: false,
+		}
+
+		term := go_edit.InitUI()
+
+		term.DrawWindow(&gef, go_edit.EDITING_MODE)
+
 		break
 	}
 
